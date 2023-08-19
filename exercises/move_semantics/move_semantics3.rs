@@ -3,14 +3,14 @@
 // (no lines with multiple semicolons necessary!)
 // Execute `rustlings hint move_semantics3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 fn main() {
     let vec0 = Vec::new();
 
-    let mut vec1 = fill_vec(vec0);
+    let vec1 = fill_vec(vec0);
 
     println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
+
+    let mut vec1 = vec1;
 
     vec1.push(88);
 
@@ -18,9 +18,7 @@ fn main() {
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
-    vec.push(22);
-    vec.push(44);
-    vec.push(66);
-
-    vec
+    vec.into_iter()
+        .chain(vec![22, 44, 66].into_iter())
+        .collect()
 }
